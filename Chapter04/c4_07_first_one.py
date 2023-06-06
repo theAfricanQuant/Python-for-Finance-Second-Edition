@@ -9,9 +9,10 @@
              paulyxy@hotmail.com
 """
 
+
 from matplotlib.finance import quotes_historical_yahoo_ochl as getData
 p = getData("IBM", (2015,1,1), (2015,12,31),asobject=True, adjusted=True)
-print(p[0:5])
+print(p[:5])
 
 
 

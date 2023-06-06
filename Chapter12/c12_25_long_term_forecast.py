@@ -27,16 +27,14 @@ def geomean_ret(returns):
     return product ** (1.0/len(returns))-1
 #
 x=getData(ticker,begdate,enddate,asobject=True, adjusted=True)
-logret = np.log(x.aclose[1:]/x.aclose[:-1]) 
-date=[]
+logret = np.log(x.aclose[1:]/x.aclose[:-1])
 d0=x.date
-for i in range(0,np.size(logret)):
-    date.append(d0[i].strftime("%Y"))
+date = [d0[i].strftime("%Y") for i in range(0,np.size(logret))]
 #
 y=pd.DataFrame(logret,date,columns=['logret'],dtype=float)
-ret_annual=np.exp(y.groupby(y.index).sum())-1 
+ret_annual=np.exp(y.groupby(y.index).sum())-1
 ret_annual.columns=['ret_annual']
-n_history=len(ret_annual) 
+n_history=len(ret_annual)
 a_mean=np.mean(np.array(ret_annual))
 g_mean=geomean_ret(np.array(ret_annual))
 w=n_forecast/n_history

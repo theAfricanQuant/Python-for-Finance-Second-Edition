@@ -7,6 +7,7 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 import numpy as np
 import scipy as sp
 import pandas as pd
@@ -18,8 +19,8 @@ x3=x2[x2<'ZZZZ']                       # remove all indices
 sp.random.seed(1234567)
 nonStocks=['GOLDPRICE','HML','SMB','Mkt_Rf','Rf','Russ3000E_D','US_DEBT','Russ3000E_X','US_GDP2009dollar','US_GDP2013dollar']
 x4=list(x3)
-for i in range(len(nonStocks)):
-    x4.remove(nonStocks[i])
+for nonStock in nonStocks:
+    x4.remove(nonStock)
 k=sp.random.uniform(low=1,high=len(x4),size=n_stocks)
 y,s=[],[]
 for i in range(n_stocks):

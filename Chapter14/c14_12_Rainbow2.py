@@ -13,14 +13,14 @@ import numpy as np
 #
 def calc_px(self, corr, **kwargs):
     self.save2px_spec(corr=corr, **kwargs)
-    return getattr(self, '_calc_' + self.px_spec.method.upper())()
+    return getattr(self, f'_calc_{self.px_spec.method.upper()}')()
 
 def _calc_MC(self, keep_hist=False):
     dt = T / n
     df = math.exp(-rf_r * T)
     np.random.seed(rng_seed)
-    h = list()
-    for path in range(0, m):
+    h = []
+    for _ in range(0, m):
         # Generate correlated Wiener Processes
         # Compute random variables with correlation
         z1 = np.random.normal(loc=0.0, scale=1.0, size=n)

@@ -24,7 +24,9 @@ enddate=(2016,12,31)
 y0=pd.Series(ret_f('IBM',begdate,enddate))
 x0=pd.Series(ret_f('^GSPC',begdate,enddate))
 #
-d=quotes_historical_yahoo_ochl('^GSPC', begdate, enddate,asobject=True,adjusted=True).date[0:-1]
+d = quotes_historical_yahoo_ochl(
+    '^GSPC', begdate, enddate, asobject=True, adjusted=True
+).date[:-1]
 lag_year=d[0].strftime("%Y")
 y1=[]
 x1=[]

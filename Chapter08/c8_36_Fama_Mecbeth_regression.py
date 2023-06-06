@@ -18,9 +18,11 @@ np.random.seed(12345)
 begdate=datetime(2013, 1, 2) 
 dateRange = pd.date_range(begdate, periods=n) 
 def makeDataFrame(): 
-    data=pd.DataFrame(np.random.randn(n,7),columns=['A','B','C','D','E',' F','G'],
-    index=dateRange) 
-    return data 
+    return pd.DataFrame(
+        np.random.randn(n, 7),
+        columns=['A', 'B', 'C', 'D', 'E', ' F', 'G'],
+        index=dateRange,
+    ) 
 #
 data = { 'A': makeDataFrame(), 'B': makeDataFrame(), 'C': makeDataFrame() }
 Y = makeDataFrame() 

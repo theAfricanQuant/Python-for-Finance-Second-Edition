@@ -18,14 +18,14 @@ def f(t):
     return sp.stats.norm.pdf(t)
 #
 plt.ylim(0,0.5)
-x = sp.arange(-7,7,0.1) 
+x = sp.arange(-7,7,0.1)
 ret=f(x)
 plt.plot(x,ret)
-x2= sp.arange(-4,z,1/40.) 
+x2= sp.arange(-4,z,1/40.)
 x3=sp.arange(z,4,1/40.)
 sum=0
 delta=0.05
-s=sp.arange(-3,z,delta) 
+s=sp.arange(-3,z,delta)
 for i in s:
     sum+=f(i)*delta
 note1='Red area to the left of the'
@@ -57,7 +57,7 @@ plt.figtext(0.57,0.47,note9)
 plt.figtext(0.57,0.44,note10)
 plt.annotate("",xy=(1.5,0.28),xytext=(4.5,0.28), arrowprops=dict(facecolor='blue',shrink=0.001))
 #
-plt.annotate('z= '+str(z),xy=(2.,0.1)) 
+plt.annotate(f'z= {str(z)}', xy=(2.,0.1))
 plt.fill_between(x2,f(x2), color='red')
 plt.fill_between(x3,f(x3), color='blue')
 plt.title("Visual presentation of VaR, 5% vs. 95%")

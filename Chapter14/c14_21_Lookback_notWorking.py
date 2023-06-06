@@ -134,7 +134,7 @@ class Lookback(European):
             Yen-fei Chen <yensfly@gmail.com>
        """
         self.save2px_spec(Sfl=Sfl, **kwargs)
-        return getattr(self, '_calc_' + self.px_spec.method.upper())()
+        return getattr(self, f'_calc_{self.px_spec.method.upper()}')()
 
 
     def _calc_LT(self):
@@ -154,31 +154,32 @@ class Lookback(European):
         K_tree = S
 
         # Compute the Strike Tree
-        for i in range(0, n, 1):
-            if (self.signCP == -1):
-                K = tuple(_['u'] * np.array(S)) + (S[len(S)-1],)
-            else:
-                K = (S[0],) + tuple(_['d'] * np.array(S))
+        for _ in range(0, n, 1):
+            K = (
+                tuple(_['u'] * np.array(S)) + (S[len(S) - 1],)
+                if (self.signCP == -1)
+                else (S[0],) + tuple(_['d'] * np.array(S))
+            )
             S = tuple(_['u'] * np.array(S)) + (_['d']*S[len(S)-1],)
             # The Spot Tree
-            S_tree = (tuple([float(s) for s in S]),) + S_tree
+            S_tree = (tuple(float(s) for s in S), ) + S_tree
             # The Strike Tree
-            K_tree = (tuple([float(k) for k in K]),) + K_tree
+            K_tree = (tuple(float(k) for k in K), ) + K_tree
 
         # The terminal stock price
         ST = self.ref.S0 * _['d'] ** np.arange(n, -1, -1) * _['u'] ** np.arange(0, n + 1)
         K = K_tree[0]
         # The payoff tree
         O = np.maximum(self.signCP * (ST - K), 0)
-        O_tree = (tuple([float(o) for o in O]),)
+        O_tree = (tuple(float(o) for o in O), )
 
         # Generate the Payoff tree
         for i in range(n, 0, -1):
             O = _['df_dt'] * ((1 - _['p']) * O[:i] + ( _['p']) * O[1:])  #prior option prices (@time step=i-1)
-            O_tree = (tuple([float(o) for o in O]),) + O_tree
+            O_tree = (tuple(float(o) for o in O), ) + O_tree
 
         self.px_spec.add(px=float(Util.demote(O)), method='LT', sub_method='binomial tree; Hull Ch.13',\
-                        LT_specs=_, ref_tree = S_tree if keep_hist else None, opt_tree = O_tree if keep_hist else None)
+                            LT_specs=_, ref_tree = S_tree if keep_hist else None, opt_tree = O_tree if keep_hist else None)
 
         return self
 
@@ -257,7 +258,7 @@ class Lookback(European):
         a = (-0.5*(_.rf_r - _.ref.q)*J*dt+0.5*_.ref.vol**2*J**2*dt)/(1+_.rf_r*dt)
         b = (1-_.ref.vol**2*J**2*dt)/(1+_.rf_r*dt)
         c = (0.5*(_.rf_r - _.ref.q)*J*dt+0.5*_.ref.vol**2*J**2*dt)/(1+_.rf_r*dt)
-        A = np.diag(b) + np.diag(a[1:M-1], k=-1) + np.diag(c[0:M-2], k=+1)
+        A = np.diag(b) + np.diag(a[1:M-1], k=-1) + np.diag(c[:M-2], k=+1)
 
         # set up boundary condition
         p = np.zeros((N+1, M+1)) # FD option price storage

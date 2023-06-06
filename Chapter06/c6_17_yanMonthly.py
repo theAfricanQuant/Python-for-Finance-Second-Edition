@@ -8,9 +8,10 @@
              paulyxy@hotmail.com
 """
 
+
 import pandas as pd
 df=pd.read_pickle("c:/temp/yanMonthly.pkl")
-print(df[0:10])
+print(df[:10])
 
 
 

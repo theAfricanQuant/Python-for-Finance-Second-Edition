@@ -8,10 +8,10 @@
              paulyxy@hotmail.com
 """
 
+
 import pandas_datareader.data as getData
 import re
 ticker='msft'
-f=open("c:/temp/msft.txt","w")
-p = getData.DataReader(ticker, "google")
-f.write(str(p))
-f.close()
+with open("c:/temp/msft.txt","w") as f:
+    p = getData.DataReader(ticker, "google")
+    f.write(str(p))

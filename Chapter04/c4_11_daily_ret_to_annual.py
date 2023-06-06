@@ -9,6 +9,7 @@
              paulyxy@hotmail.com
 """
 
+
 import numpy as np
 import pandas as pd
 from matplotlib.finance import quotes_historical_yahoo_ochl as getData
@@ -19,10 +20,7 @@ enddate=(2012,12,31)
 x=getData(ticker,begdate,enddate,asobject=True,adjusted=True)
 logret = np.log(x.aclose[1:]/x.aclose[:-1])
 
-date=[]
 d0=x.date
-for i in range(0,np.size(logret)):
-    date.append(d0[i].strftime("%Y"))
-
+date = [d0[i].strftime("%Y") for i in range(0,np.size(logret))]
 y=pd.DataFrame(logret,date,columns=['retAnnual'])
 ret_annual=np.exp(y.groupby(y.index).sum())-1

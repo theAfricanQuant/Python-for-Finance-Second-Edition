@@ -9,6 +9,7 @@
 """
 
 
+
 import numpy as np
 import scipy as sp
 import pandas as pd
@@ -29,10 +30,7 @@ nSimulations=1000                           # number of simulations
 corr_=sp.zeros((nStocks,nStocks))
 for i in range(nStocks):
     for j in range(nStocks):
-        if i==j:
-            corr_[i,j]=1
-        else:
-            corr_[i,j]=corr_0[i+j]
+        corr_[i,j] = 1 if i==j else corr_0[i+j]
 U=np.linalg.cholesky(corr_)
 #
 # Step 3: Generate two uncorrelated time series 
@@ -57,23 +55,23 @@ def objFunction(W, R, target_ret):
     return np.sqrt(port_var) + penalty       # objective function 
 #
 # Step 6: estimate optimal portfolo for a given return 
-out_mean,out_std,out_weight=[],[],[] 
-stockMean=np.mean(R,axis=0)    
+out_mean,out_std,out_weight=[],[],[]
+stockMean=np.mean(R,axis=0)
 #
 for r in np.linspace(np.min(stockMean), np.max(stockMean), num=100):
     W = sp.ones([nStocks])/nStocks              # starting:equal w 
-    b_ = [(0,1) for i in range(nStocks)]       # bounds
+    b_ = [(0,1) for _ in range(nStocks)]
     c_ = ({'type':'eq', 'fun': lambda W: sum(W)-1. })# constraint
-    result=minimize(objFunction,W,(R,r),method='SLSQP',constraints=c_, bounds=b_)    
+    result=minimize(objFunction,W,(R,r),method='SLSQP',constraints=c_, bounds=b_)
     if not result.success:                    # handle error
-        raise BaseException(result.message) 
+        raise BaseException(result.message)
     out_mean.append(round(r,4))               # a few decimal places
     std_=round(np.std(np.sum(R*result.x,axis=1)),6)
     out_std.append(std_)
-    out_weight.append(result.x) 
+    out_weight.append(result.x)
 #
 # Step 7: plot the efficient frontier
-plt.title('Simulation for an Efficient Frontier: '+str(nStocks)+' stocks')
+plt.title(f'Simulation for an Efficient Frontier: {str(nStocks)} stocks')
 plt.xlabel('Standard Deviation of the Porfolio')
 plt.ylabel('Return of the2-stock portfolio')
 plt.plot(out_std,out_mean,'--',linewidth=3)

@@ -21,12 +21,13 @@ stocks=['IBM','WMT','AAPL','C','MSFT']
 # Step 2: define 2 functions
 def ret_monthly(ticker):  #	function 1
     x = getData(ticker,(begYear,1,1),(endYear,12,31),asobject=True,adjusted=True)
-    logret=np.log(x.aclose[1:]/x.aclose[:-1]) 
-    date=[]
+    logret=np.log(x.aclose[1:]/x.aclose[:-1])
     d0=x.date
-    for i in range(0,np.size(logret)): 
-        date.append(''.join([d0[i].strftime("%Y"),d0[i].strftime("%m")]))
-    y=pd.DataFrame(logret,date,columns=[ticker]) 
+    date = [
+        ''.join([d0[i].strftime("%Y"), d0[i].strftime("%m")])
+        for i in range(0, np.size(logret))
+    ]
+    y=pd.DataFrame(logret,date,columns=[ticker])
     return y.groupby(y.index).sum()
 
 # function 2: objective function 
@@ -47,28 +48,27 @@ for i in xrange(1,n_stock):                # merge with other stocks
     R=np.array(R0)
 
 # Step 4: estimate optimal portfolio for a given return 
-out_mean,out_std,out_weight=[],[],[] 
+out_mean,out_std,out_weight=[],[],[]
 stockMean=np.mean(R,axis=0)
 for r in np.linspace(np.min(stockMean),np.max(stockMean),num=100):
     W = np.ones([n_stock])/n_stock	  # starting from equal weights 
-    b_ = [(0,1) 
-    for i in range(n_stock)]	          # bounds, here no short 
+    b_ = [(0,1) for _ in range(n_stock)]
     c_ = ({'type':'eq', 'fun': lambda W: sum(W)-1. })#constraint
     result=sp.optimize.minimize(objFunction,W,(R,r),method='SLSQP',constraints=c_, bounds=b_)
     if not result.success:               # handle error raise 
         BaseException(result.message)
     out_mean.append(round(r,4))           # 4 decimal places 
-    std_=round(np.std(np.sum(R*result.x,axis=1)),6) 
+    std_=round(np.std(np.sum(R*result.x,axis=1)),6)
     out_std.append(std_)
     out_weight.append(result.x)
 
 # Step 4: plot the efficient frontier 
 plt.title('Efficient Frontier')
-plt.xlabel('Standard Deviation of the porfolio (Risk))') 
-plt.ylabel('Return of the portfolio') 
-plt.figtext(0.5,0.75,str(n_stock)+' stock are used: ') 
-plt.figtext(0.5,0.7,' '+str(stocks))
-plt.figtext(0.5,0.65,'Time period: '+str(begYear)+' ------ '+str(endYear)) 
+plt.xlabel('Standard Deviation of the porfolio (Risk))')
+plt.ylabel('Return of the portfolio')
+plt.figtext(0.5, 0.75, f'{n_stock} stock are used: ')
+plt.figtext(0.5, 0.7, f' {str(stocks)}')
+plt.figtext(0.5, 0.65, f'Time period: {str(begYear)} ------ {str(endYear)}')
 plt.plot(out_std,out_mean,'--')
 plt.show()
 

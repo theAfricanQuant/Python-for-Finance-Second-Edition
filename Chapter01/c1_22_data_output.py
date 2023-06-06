@@ -8,7 +8,7 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
-f=open("c:/temp/out.txt","w")
-x="This is great"
-f.write(x)
-f.close()
+
+with open("c:/temp/out.txt","w") as f:
+    x="This is great"
+    f.write(x)

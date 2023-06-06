@@ -8,7 +8,8 @@
              paulyxy@hotmail.com
 """
 
+
 from matplotlib.finance import quotes_historical_yahoo_ochl as getData
 x = getData("IBM",(2016,1,1),(2016,1,21),asobject=True, adjusted=True)
-print(x[0:4])
+print(x[:4])
 

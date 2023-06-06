@@ -8,15 +8,14 @@
              paulyxy@hotmail.com
 """
 
+
 from matplotlib.finance import quotes_historical_yahoo_ochl as getData
 import csv
-f=open("c:/temp/c.csv","w")
+with open("c:/temp/c.csv","w") as f:
+    ticker='c'
+    begdate=(2016,1,1)
+    enddate=(2017,1,9)
+    p = getData(ticker, begdate, enddate,asobject=True,adjusted=True)
 
-ticker='c'
-begdate=(2016,1,1)
-enddate=(2017,1,9)
-p = getData(ticker, begdate, enddate,asobject=True,adjusted=True)
-
-writer = csv.writer(f)
-writer.writerows(p)
-f.close()
+    writer = csv.writer(f)
+    writer.writerows(p)

@@ -10,6 +10,7 @@
 """
 
 
+
 import scipy as sp
 import matplotlib.pyplot as plt
 nYear=5                 # number of years
@@ -39,7 +40,7 @@ units0=sp.random.uniform(low=lowUnit,high=highUnit,size=n2)
 R0=sp.random.uniform(lowRate,highRate,size=n2)
 #
 npv=[]
-for i in sp.arange(nSimulation):
+for i in sp.arange(n2):
     units=sp.ones(n)*units0[i]
     price=price0[i]
     R=R0[i]

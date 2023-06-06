@@ -8,6 +8,7 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 from matplotlib.pyplot import *
 n=[1,2,4,6,8,10,12,14,16,18,20,25,30,35,40,45,50,75,100,200,300,400,500,600,700,800,900,1000]
 
@@ -24,7 +25,7 @@ annotate('Total portfolio risk', xy=(5,0.3),xytext=(25,0.35),arrowprops=dict(fac
 
 figtext(0.15,0.4,"Diversiable risk")
 figtext(0.65,0.25,"Nondiversifiable risk")
-plot(n[0:17],port_sigma[0:17])
+plot(n[:17], port_sigma[:17])
 
 
 title("Relationship between n and portfolio risk")

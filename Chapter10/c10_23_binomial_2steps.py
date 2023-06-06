@@ -8,8 +8,9 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 import p4f
-from math import sqrt,exp 
+from math import sqrt,exp
 import matplotlib.pyplot as plt
 #
 s=10
@@ -19,23 +20,23 @@ T=3./12
 x=10
 n=2
 deltaT=T/n
-q=0 
+q=0
 u=exp(sigma*sqrt(deltaT))
-d=1/u 
+d=1/u
 a=exp((r-q)*deltaT)
-p=(a-d)/(u-d) 
+p=(a-d)/(u-d)
 su=round(s*u,2);
-suu=round(s*u*u,2) 
+suu=round(s*u*u,2)
 sd=round(s*d,2)
-sdd=round(s*d*d,2) 
+sdd=round(s*d*d,2)
 sud=s
 
-plt.figtext(0.08,0.6,'Stock '+str(s)) 
-plt.figtext(0.33,0.76,"Stock price=$"+str(su)) 
-plt.figtext(0.33,0.27,'Stock price='+str(sd)) 
-plt.figtext(0.75,0.91,'Stock price=$'+str(suu)) 
-plt.figtext(0.75,0.6,'Stock price=$'+str(sud)) 
-plt.figtext(0.75,0.28,"Stock price="+str(sdd)) 
+plt.figtext(0.08, 0.6, f'Stock {sud}')
+plt.figtext(0.33, 0.76, f"Stock price=${str(su)}")
+plt.figtext(0.33, 0.27, f'Stock price={str(sd)}')
+plt.figtext(0.75, 0.91, f'Stock price=${str(suu)}')
+plt.figtext(0.75, 0.6, f'Stock price=${sud}')
+plt.figtext(0.75, 0.28, f"Stock price={str(sdd)}")
 p4f.binomial_grid(n)
 plt.show()
 

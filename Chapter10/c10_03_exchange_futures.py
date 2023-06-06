@@ -11,8 +11,7 @@
 
 import scipy as sp
 def futuresExchangeRate(s0,rateDomestic,rateForeign,T):
-    futureEx=s0*sp.exp((rateDomestic-rateForeign)*T)
-    return futureEx
+    return s0*sp.exp((rateDomestic-rateForeign)*T)
 
 s0=1.25
 rHome=0.01

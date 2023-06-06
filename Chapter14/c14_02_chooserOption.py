@@ -11,14 +11,12 @@
 
 from scipy import log,exp,sqrt,stats 
 def callAndPut(S,X,T,r,sigma,tao,type='C'):
-    d1=(log(S/X)+r*T+0.5*sigma*sigma*tao)/(sigma*sqrt(tao)) 
+    d1=(log(S/X)+r*T+0.5*sigma*sigma*tao)/(sigma*sqrt(tao))
     d2 = d1-sigma*sqrt(tao)
     if type.upper()=='C':
-        c=S*stats.norm.cdf(d1)-X*exp(-r*T)*stats.norm.cdf(d2)
-        return c
+        return S*stats.norm.cdf(d1)-X*exp(-r*T)*stats.norm.cdf(d2)
     else:
-        p=X*exp(-r*T)*stats.norm.cdf(-d2)-S*stats.norm.cdf(-d1)
-        return p
+        return X*exp(-r*T)*stats.norm.cdf(-d2)-S*stats.norm.cdf(-d1)
 #
 def chooserOption(S,X,T,r,sigma,tao):
     call_T=callAndPut(S,X,T,r,sigma,T)

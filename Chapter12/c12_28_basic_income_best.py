@@ -41,8 +41,7 @@ def costBasicIncome():
     unitBenefitNonWorker=40*52*marginalWorkerHourlyProductivity.rvs()
     benefitNonWorkers = 1 * (nNonWorker*unitBenefitNonWorker)
     geniusBenefit=geniusEffect(nNonWorker)
-    totalCost=salaryCost + admCost - benefitNonWorkers-geniusBenefit
-    return totalCost
+    return salaryCost + admCost - benefitNonWorkers-geniusBenefit
 #
 def costBasicJob():
     unitAdmCost4disabled= norm(500,150).rvs()

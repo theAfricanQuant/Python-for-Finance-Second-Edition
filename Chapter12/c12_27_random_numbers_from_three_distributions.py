@@ -8,6 +8,7 @@
              paulyxy@hotmail.com
 """
 
+
 import scipy as sp
 import scipy.stats as stats
 sp.random.seed(123)
@@ -15,9 +16,9 @@ u=stats.uniform(-1,1).rvs()
 n=stats.norm(500,150).rvs()
 b=stats.binom(10000,0.1).rvs()
 x='random number from a '
-print(x+"uniform distribution ",u)
-print(x+" normal distribution ",n)
-print(x+" binomial distribution",b)
+print(f"{x}uniform distribution ", u)
+print(f"{x} normal distribution ", n)
+print(f"{x} binomial distribution", b)
 
 
 

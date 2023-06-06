@@ -9,12 +9,13 @@
              paulyxy@hotmail.com
 """
 
-import scipy as sp 
-sp.random.seed(12345) 
+
+import scipy as sp
+sp.random.seed(12345)
 mean=0.05
 std=0.1
 n=50
-x=sp.random.normal(mean,std,n) 
-print(x[0:5])
+x=sp.random.normal(mean,std,n)
+print(x[:5])
 
 

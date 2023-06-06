@@ -32,8 +32,7 @@ def delta2(S,X,T,r,sigma):
     s2=S+tiny
     c1=bsCall(s1,X,T,r,sigma)
     c2=bsCall(s2,X,T,r,sigma)
-    delta=(c2-c1)/(s2-s1)
-    return delta
+    return (c2-c1)/(s2-s1)
 
 print("delta (close form)=", delta1(S,X,T,r,sigma))
 print("delta (tiny number)=", delta2(S,X,T,r,sigma))

@@ -21,12 +21,12 @@ x=BeautifulSoup(requests.get(url).text, "html.parser")
 
 
 def getFin(ticker, statement="IS", quarterly=False):
-    if statement == "is" or statement == "bs" or statement == "cf":
-        url = "https://finance.yahoo.com/q/" + statement + "?s=" + ticker
+    if statement in ["is", "bs", "cf"]:
+        url = f"https://finance.yahoo.com/q/{statement}?s={ticker}"
         if not quarterly:
             url += "&annual"
         return BeautifulSoup(requests.get(url).text, "html.parser")
-    return sys.exit("Invalid financial statement code '" + statement + "' passed.")
+    return sys.exit(f"Invalid financial statement code '{statement}' passed.")
 #
 #x=getFin("AAPL")
 

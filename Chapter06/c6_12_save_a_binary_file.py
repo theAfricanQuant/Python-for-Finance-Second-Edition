@@ -8,12 +8,12 @@
              paulyxy@hotmail.com
 """
 
-import array 
-import numpy as np 
-outfile = "c:/temp/tmp.bin" 
-fileobj = open(outfile, mode='wb') 
-outvalues = array.array('f') 
-data=np.array([1,2,3]) 
-outvalues.fromlist(data.tolist()) 
-outvalues.tofile(fileobj) 
-fileobj.close()
+
+import array
+import numpy as np
+outfile = "c:/temp/tmp.bin"
+with open(outfile, mode='wb') as fileobj:
+    outvalues = array.array('f')
+    data=np.array([1,2,3])
+    outvalues.fromlist(data.tolist())
+    outvalues.tofile(fileobj)

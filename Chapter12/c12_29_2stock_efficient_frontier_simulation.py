@@ -48,28 +48,28 @@ def objFunction(W, R, target_ret):
     return np.sqrt(port_var) + penalty	      # objective function
 #
 # Step 6: estimate optimal portfolio for a given return 
-out_mean,out_std,out_weight=[],[],[] 
+out_mean,out_std,out_weight=[],[],[]
 stockMean=np.mean(R,axis=0)
 #
 for r in np.linspace(np.min(stockMean),np.max(stockMean),num=100): 
     W = sp.ones([n_stock])/n_stock              # start equal w
-    b_ = [(0,1) for i in range(n_stock)]       # bounds
+    b_ = [(0,1) for _ in range(n_stock)]
     c_ = ({'type':'eq', 'fun': lambda W: sum(W)-1. })# constraint 
     result=minimize(objFunction,W,(R,r),method='SLSQP',constraints=c_,bounds=b_)
     if not result.success:                     # handle error 
         raise BaseException(result.message)
     out_mean.append(round(r,4))                # decimal places
-    std_=round(np.std(np.sum(R*result.x,axis=1)),6) 
-    out_std.append(std_) 
+    std_=round(np.std(np.sum(R*result.x,axis=1)),6)
+    out_std.append(std_)
     out_weight.append(result.x)
 #
 # Step 7: plot the efficient frontier
-plt.title('Simulation for an Efficient Frontier from given 2 stocks') 
-plt.xlabel('Standard Deviation of the 2-stock Portfolio (Risk)') 
+plt.title('Simulation for an Efficient Frontier from given 2 stocks')
+plt.xlabel('Standard Deviation of the 2-stock Portfolio (Risk)')
 plt.ylabel('Return of the 2-stock portfolio')
-plt.figtext(0.2,0.80,' mean = '+str(stockMean)) 
-plt.figtext(0.2,0.75,' std	='+str(std_0)) 
-plt.figtext(0.2,0.70,' correlation ='+str(corr_))
-plt.plot(np.array(std_0),np.array(stockMean),'o',markersize=8) 
+plt.figtext(0.2, 0.80, f' mean = {str(stockMean)}')
+plt.figtext(0.2,0.75,' std	='+str(std_0))
+plt.figtext(0.2, 0.70, f' correlation ={str(corr_)}')
+plt.plot(np.array(std_0),np.array(stockMean),'o',markersize=8)
 plt.plot(out_std,out_mean,'--',linewidth=3)
 plt.show()

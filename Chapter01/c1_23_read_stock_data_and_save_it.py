@@ -8,12 +8,12 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 import re
 from matplotlib.finance import quotes_historical_yahoo_ochl
 ticker='dell'
-outfile=open("c:/temp/dell.txt","w")
-begdate=(2013,1,1)
-enddate=(2016,11,9)
-p=quotes_historical_yahoo_ochl(ticker,begdate,enddate,asobject=True,adjusted=True)
-outfile.write(str(p))
-outfile.close()
+with open("c:/temp/dell.txt","w") as outfile:
+    begdate=(2013,1,1)
+    enddate=(2016,11,9)
+    p=quotes_historical_yahoo_ochl(ticker,begdate,enddate,asobject=True,adjusted=True)
+    outfile.write(str(p))

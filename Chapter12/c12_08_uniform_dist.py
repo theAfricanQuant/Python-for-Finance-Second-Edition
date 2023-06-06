@@ -9,7 +9,8 @@
              paulyxy@hotmail.com
 """
 
-import scipy as sp 
-sp.random.seed(123345) 
-x=sp.random.uniform(low=1,high=100,size=10) 
-print(x[0:5])
+
+import scipy as sp
+sp.random.seed(123345)
+x=sp.random.uniform(low=1,high=100,size=10)
+print(x[:5])

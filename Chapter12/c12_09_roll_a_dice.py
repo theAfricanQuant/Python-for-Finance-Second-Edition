@@ -10,13 +10,8 @@
 
 import random
 def rollDice():
-    roll = random.randint(1,6)
-    return roll
-i =1
+    return random.randint(1,6)
 n=10
-result=[]
 random.seed(123)
-while i<n:
-    result.append(rollDice())
-    i+=1
+result = [rollDice() for _ in range(1, n)]
 print(result)

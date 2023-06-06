@@ -8,13 +8,14 @@
              paulyxy@hotmail.com
 """
 
+
 import numpy as np
 import pandas as pd
 from pandas.stats.api import ols
 
 df=pd.read_pickle("c:/temp/yanMonthly.pkl")
 sp500=df[df.index=='^GSPC']
-print(sp500[0:5])
+print(sp500[:5])
 sp500['retMkt']=sp500['VALUE'].diff()/sp500['VALUE'].shift(1)
 sp500['retMktLag']=sp500['retMkt'].shift(1)
 sp500['retMktLead']=sp500['retMkt'].shift(-1)

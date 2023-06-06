@@ -10,6 +10,7 @@
              paulyxy@hotmail.com
 """
 
+
 import sobol_seq
 import scipy as sp
 import pandas as pd
@@ -18,7 +19,7 @@ n=1000
 for i in sp.arange(n):
      t=sobol_seq.i4_sobol(1,i)
      a.append(t)
-print(a[0:10])
+print(a[:10])
 b=pd.DataFrame(a,columns=['Sobol','b'])
 sobol=b['Sobol']
 sobol.to_pickle("e:/sobol.pkl")

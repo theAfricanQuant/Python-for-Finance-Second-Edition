@@ -20,8 +20,7 @@ n=len(tickers)             # number of observations
 
 def ret_f(ticker,begdate,enddte):
     x=getData(ticker,begdate,enddate,asobject=True,adjusted=True)
-    ret =x.aclose[1:]/x.aclose[:-1]-1
-    return ret
+    return x.aclose[1:]/x.aclose[:-1]-1
 
 def meanVarAnnual(ret):
     meanDaily=sp.mean(ret)

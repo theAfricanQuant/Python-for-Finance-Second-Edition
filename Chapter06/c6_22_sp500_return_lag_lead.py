@@ -8,11 +8,12 @@
              paulyxy@hotmail.com
 """
 
+
 import pandas as pd
 import numpy as np
 df=pd.read_pickle("c:/temp/yanMonthly.pkl")
 sp500=df[df.index=='^GSPC']
-print(sp500[0:5])
+print(sp500[:5])
 ret=sp500['VALUE'].diff()/sp500['VALUE'].shift(1)
-print(ret[0:5])
+print(ret[:5])
 

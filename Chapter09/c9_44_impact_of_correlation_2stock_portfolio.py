@@ -23,10 +23,8 @@ rf=0.0003                  # annual risk-free rate
 def ret_annual(ticker,begdate,enddte):
     x=getData(ticker,begdate,enddate,asobject=True,adjusted=True)
     logret =sp.log(x.aclose[1:]/x.aclose[:-1])
-    date=[]
     d0=x.date
-    for i in range(0,sp.size(logret)):
-        date.append(d0[i].strftime("%Y"))
+    date = [d0[i].strftime("%Y") for i in range(0,sp.size(logret))]
     y=pd.DataFrame(logret,date,columns=[ticker])
     return sp.exp(y.groupby(y.index).sum())-1
 def portfolio_var(R,w):

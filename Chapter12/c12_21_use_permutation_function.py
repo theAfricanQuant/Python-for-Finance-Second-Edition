@@ -10,10 +10,11 @@
 """
 
 
-import numpy as np 
-x=range(1,11) 
-print(x) 
-for i in range(5):
-    y=np.random.permutation(x) 
+
+import numpy as np
+x=range(1,11)
+print(x)
+for _ in range(5):
+    y=np.random.permutation(x)
 #
 print(y)

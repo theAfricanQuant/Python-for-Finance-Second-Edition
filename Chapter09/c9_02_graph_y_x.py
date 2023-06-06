@@ -9,6 +9,7 @@
 """
 
 
+
 import scipy as sp
 import matplotlib.pyplot as plt
 x=sp.arange(-5,5,0.01)
@@ -16,7 +17,7 @@ a=3.2
 b=5.0
 y=a+b*x**2
 plt.plot(x,y)
-plt.title("y= "+str(a)+"+"+str(b)+"x^2")
+plt.title(f"y= {a}+{b}x^2")
 plt.ylabel("y")
 plt.xlabel("x")
 plt.show()

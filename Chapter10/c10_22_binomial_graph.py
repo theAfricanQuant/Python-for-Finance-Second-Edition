@@ -24,9 +24,7 @@ def binomial_grid(n):
             if i<n:
                 G.add_edge((i,j),(i+1,j))
                 G.add_edge((i,j),(i+1,j+1))
-    posG={}
-    for node in G.nodes(): 
-        posG[node]=(node[0],n+2+node[0]-2*node[1])
+    posG = {node: (node[0],n+2+node[0]-2*node[1]) for node in G.nodes()}
     nx.draw(G,pos=posG) 
 binomial_grid(n)
 plt.show()

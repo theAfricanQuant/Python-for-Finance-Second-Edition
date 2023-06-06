@@ -8,10 +8,10 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 import urllib
-f = open('c:/temp/00000001.jpg','wb')
-f.write(urllib.urlopen('http://www.gunnerkrigg.com//comics/00000001.jpg').read())
-f.close()
+with open('c:/temp/00000001.jpg','wb') as f:
+    f.write(urllib.urlopen('http://www.gunnerkrigg.com//comics/00000001.jpg').read())
 
 
 

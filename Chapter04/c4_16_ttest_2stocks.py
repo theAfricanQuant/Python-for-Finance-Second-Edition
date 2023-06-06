@@ -18,8 +18,7 @@ enddate=(2016,12,9)
 def ret_f(ticker,begdate,enddate):
      p = getData(ticker,begdate, enddate,asobject=True,adjusted=True)
      ret=p.aclose[1:]
-     ret=p.aclose[1:]/p.aclose[:-1]-1
-     return(ret)
+     return p.aclose[1:]/p.aclose[:-1]-1
      
 a=ret_f('IBM',begdate,enddate)
 b=ret_f('MSFT',begdate,enddate)

@@ -28,20 +28,17 @@ from matplotlib.mlab import csv2rec
 
 def gjr_garch_likelihood(parameters, data, sigma2, out=None): 
     mu = parameters[0]
-    omega = parameters[1] 
-    alpha = parameters[2] 
-    gamma = parameters[3] 
+    omega = parameters[1]
+    alpha = parameters[2]
+    gamma = parameters[3]
     beta = parameters[4]
     T = size(data,0)
     eps = data-mu
     for t in xrange(1,T):
         sigma2[t]=(omega+alpha*eps[t-1]**2+gamma*eps[t-1]**2*(eps[t- 1]<0)+beta*sigma2[t-1])
-        logliks = 0.5*(log(2*pi) + log(sigma2) + eps**2/sigma2) 
+        logliks = 0.5*(log(2*pi) + log(sigma2) + eps**2/sigma2)
     loglik = sum(logliks)
-    if out is None: 
-        return loglik
-    else:
-        return loglik, logliks, copy(sigma2)
+    return loglik if out is None else (loglik, logliks, copy(sigma2))
 
 def gjr_constraint(parameters,data, sigma2, out=None):
     alpha = parameters[2]

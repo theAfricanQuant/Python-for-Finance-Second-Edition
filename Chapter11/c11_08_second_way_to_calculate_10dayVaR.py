@@ -7,8 +7,9 @@
   email    : yany@canisius.edu
              paulyxy@hotmail.com
 """
+
 import numpy as np
-import pandas as pd 
+import pandas as pd
 from matplotlib.finance import quotes_historical_yahoo_ochl as getData
 from scipy.stats import norm
 
@@ -21,18 +22,15 @@ begdate=(2012,1,1)      # input 5
 enddate=(2016,12,31)    # input 6
 
 #
-z=norm.ppf(confidence_level) 
+z=norm.ppf(confidence_level)
 x = getData(ticker, begdate, enddate,asobject=True, adjusted=True)
 logret = np.log(x.aclose[1:]/x.aclose[:-1])
 
-# method 2: calculate 10 day returns 
-ddate=[]
 d0=x.date
-for i in range(0,np.size(logret)): 
-    ddate.append(int(i/nDays))
-y=pd.DataFrame(logret,ddate,columns=['retNdays']) 
+ddate = [int(i/nDays) for i in range(0,np.size(logret))]
+y=pd.DataFrame(logret,ddate,columns=['retNdays'])
 retNdays=y.groupby(y.index).sum()
 #print(retNdays.head())
-position=n_shares*x.close[0] 
+position=n_shares*x.close[0]
 VaR=position*z*np.std(retNdays)
 print("Holding=",position, "VaR=", round(VaR,4), "in ", nDays, "Days")

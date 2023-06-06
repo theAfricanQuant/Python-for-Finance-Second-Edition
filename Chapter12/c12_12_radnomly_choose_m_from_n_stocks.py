@@ -8,15 +8,14 @@
              paulyxy@hotmail.com
 """
 
-import scipy as sp 
-n_stocks_available=500 
-n_stocks=20 
-sp.random.seed(123345) 
+
+import scipy as sp
+n_stocks_available=500
+n_stocks=20
+sp.random.seed(123345)
 x=sp.random.uniform(low=1,high=n_stocks_available,size=n_stocks)
-y=[] 
-for i in range(n_stocks): 
-    y.append(int(x[i])) 
+y = [int(x[i]) for i in range(n_stocks)]
 #print y 
-final=sp.unique(y) 
-print(final) 
+final=sp.unique(y)
+print(final)
 print(len(final)) 
